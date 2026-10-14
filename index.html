@@ -3,181 +3,199 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FimlyBuzz | Movie Discovery</title>
+
+<title>Filmybuzz | Movie Discovery</title>
 
 <style>
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  background: #090a10;
-  color: white;
-  font-family: Arial, sans-serif;
+    margin: 0;
+    background: #090a10;
+    color: white;
+    font-family: Arial, sans-serif;
 }
 
 header {
-  background: #11131b;
-  padding: 20px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
+    background: #11131b;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .logo {
-  font-size: 28px;
-  font-weight: bold;
-  color: #c6ff4d;
+    font-size: 28px;
+    font-weight: bold;
+    color: #c6ff4d;
 }
 
 .search {
-  display: flex;
-  gap: 6px;
+    display: flex;
+    gap: 6px;
 }
 
 input {
-  padding: 12px;
-  border: 1px solid #333;
-  border-radius: 7px;
-  background: #20212a;
-  color: white;
-  width: 180px;
+    padding: 12px;
+    border: 1px solid #444;
+    border-radius: 7px;
+    background: #20212a;
+    color: white;
+    width: 180px;
 }
 
 button {
-  padding: 12px 15px;
-  background: #c6ff4d;
-  border: none;
-  border-radius: 7px;
-  font-weight: bold;
-  cursor: pointer;
+    padding: 12px 15px;
+    background: #c6ff4d;
+    border: none;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .hero {
-  padding: 65px 6%;
-  background: linear-gradient(120deg, #202b29, #11121b 65%);
+    padding: 65px 6%;
+    background: linear-gradient(120deg, #202b29, #11121b 65%);
 }
 
 .hero h1 {
-  font-size: clamp(36px, 6vw, 60px);
-  margin: 0 0 15px;
+    font-size: clamp(36px, 6vw, 60px);
+    margin: 0 0 15px;
 }
 
 .hero h1 span {
-  color: #c6ff4d;
+    color: #c6ff4d;
 }
 
 .hero p {
-  color: #c3c5d0;
-  line-height: 1.7;
-  max-width: 550px;
+    color: #c3c5d0;
+    line-height: 1.7;
+    max-width: 550px;
 }
 
-h2 {
-  margin: 35px 6% 20px;
+main {
+    padding: 25px 5%;
 }
 
 .categories {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin: 0 6% 25px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0;
 }
 
 .categories button {
-  background: #20212a;
-  color: white;
-  border: 1px solid #393b46;
+    background: #20212a;
+    color: white;
+    border: 1px solid #383a46;
 }
 
+.categories button.active,
 .categories button:hover {
-  background: #c6ff4d;
-  color: black;
+    background: #c6ff4d;
+    color: #111;
 }
 
-.movies {
-  padding: 0 6% 45px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-  gap: 20px;
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
 }
 
 .movie {
-  background: #151720;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid #292b35;
-  transition: transform .2s;
+    background: #151720;
+    border: 1px solid #292b36;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform .2s;
 }
 
 .movie:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);
 }
 
-.movie img {
-  width: 100%;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  display: block;
-  background: #252832;
+.poster {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    background: #252735;
+    display: block;
 }
 
 .movie-info {
-  padding: 12px;
+    padding: 12px;
 }
 
-.movie-info h3 {
-  font-size: 15px;
-  margin: 0 0 8px;
+.movie h3 {
+    font-size: 16px;
+    margin: 0 0 9px;
+}
+
+.tag {
+    color: #c6ff4d;
+    font-size: 12px;
 }
 
 .movie-info p {
-  font-size: 12px;
-  color: #b7bac7;
+    color: #b7b9c5;
+    font-size: 13px;
 }
 
 .movie-info a {
-  display: inline-block;
-  margin-top: 5px;
-  color: #c6ff4d;
-  font-size: 13px;
-  text-decoration: none;
-}
-
-footer {
-  padding: 25px 6%;
-  background: #11131b;
-  color: #a9abba;
-  text-align: center;
-  font-size: 13px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 6px;
+    background: #c6ff4d;
+    color: #111;
+    font-weight: bold;
+    font-size: 13px;
 }
 
 #message {
-  margin: 0 6% 25px;
-  color: #c6ff4d;
+    color: #c6ff4d;
+    padding: 20px 0;
 }
 
-@media(max-width: 500px) {
-  header {
-    align-items: flex-start;
-  }
+footer {
+    text-align: center;
+    padding: 30px 15px;
+    background: #11131b;
+    color: #b7b9c5;
+    margin-top: 35px;
+}
 
-  .search {
-    width: 100%;
-  }
+@media (max-width: 700px) {
+    .movie-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
 
-  input {
-    flex: 1;
-    min-width: 0;
-  }
+    .poster {
+        height: 200px;
+    }
 
-  .movies {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
+    header {
+        padding: 16px;
+    }
+
+    main {
+        padding: 20px 14px;
+    }
+
+    .hero {
+        padding: 45px 20px;
+    }
+
+    input {
+        width: 150px;
+    }
 }
 </style>
 </head>
@@ -185,145 +203,230 @@ footer {
 <body>
 
 <header>
-  <div class="logo">FimlyBuzz 🎬</div>
+    <div class="logo">🎬 Filmybuzz</div>
 
-  <form class="search" id="searchForm">
-    <input id="searchInput" placeholder="Search movies..." />
-    <button type="submit">Search</button>
-  </form>
+    <div class="search">
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="Search movies..."
+        >
+        <button onclick="renderMovies()">Search</button>
+    </div>
 </header>
 
 <section class="hero">
-  <h1>Discover Your Next<br><span>Favourite Movie.</span></h1>
+    <h1>Discover Your <span>Next Movie.</span></h1>
 
-  <p>
-    Explore cinema from around the world.
-    Discover movies, browse genres and find official trailers
-    with FimlyBuzz.
-  </p>
+    <p>
+        Explore Bollywood, Hollywood, South Indian and Hindi
+        dubbed movies. Find your next favourite film on Filmybuzz!
+    </p>
 
-  <button onclick="document.getElementById('movieSection').scrollIntoView({behavior:'smooth'})">
-    Explore Movies ↓
-  </button>
+    <button onclick="document.getElementById('movies')
+        .scrollIntoView({behavior:'smooth'})">
+        Explore Movies ↓
+    </button>
 </section>
 
-<h2 id="movieSection">🔥 Movie Collection</h2>
+<main id="movies">
 
-<div class="categories">
-  <button onclick="filterMovies('all')">All</button>
-  <button onclick="filterMovies('bollywood')">Bollywood</button>
-  <button onclick="filterMovies('hollywood')">Hollywood</button>
-  <button onclick="filterMovies('south')">South Indian</button>
-  <button onclick="filterMovies('animation')">Animation</button>
-</div>
+    <h2>🍿 Explore Movies</h2>
 
-<div id="message"></div>
-<div class="movies" id="movies"></div>
+    <div class="categories">
+        <button class="active" onclick="setCategory('All', this)">All</button>
+        <button onclick="setCategory('Bollywood', this)">Bollywood</button>
+        <button onclick="setCategory('Hollywood', this)">Hollywood</button>
+        <button onclick="setCategory('South Indian', this)">South Indian</button>
+        <button onclick="setCategory('Hindi Dubbed', this)">Hindi Dubbed</button>
+    </div>
+
+    <div id="movieGrid" class="movie-grid"></div>
+
+    <p id="message"></p>
+
+</main>
 
 <footer>
-  <div class="logo">FimlyBuzz</div>
-  <p>Discover movies. Explore stories. Love cinema.</p>
-  <p>Movie information and trailers are linked to their respective sources.</p>
-  <p>© <span id="year"></span> FimlyBuzz</p>
+    <h3>🎬 Filmybuzz</h3>
+    <p>Your movie discovery destination.</p>
+    <p>© 2026 Filmybuzz</p>
 </footer>
 
 <script>
-const movieData = [
-  {
-    title: "Jawan",
-    language: "bollywood",
-    year: "2023",
-    poster: "https://image.tmdb.org/t/p/w500/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg"
-  },
-  {
-    title: "Inception",
-    language: "hollywood",
-    year: "2010",
-    poster: "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
-  },
-  {
-    title: "RRR",
-    language: "south",
-    year: "2022",
-    poster: "https://image.tmdb.org/t/p/w500/wE0I6efAW4cDDmZQWtwZMOW44EJ.jpg"
-  },
-  {
-    title: "Spider-Man: Into the Spider-Verse",
-    language: "animation",
-    year: "2018",
-    poster: "https://image.tmdb.org/t/p/w500/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg"
-  }
+const movies = [
+    {
+        title: "3 Idiots",
+        category: "Bollywood",
+        year: 2009,
+        genre: "Comedy · Drama",
+        poster: "https://image.tmdb.org/t/p/w500/66A9MqXOyVFCssoloscw79z8Tew.jpg"
+    },
+    {
+        title: "Dangal",
+        category: "Bollywood",
+        year: 2016,
+        genre: "Sports · Drama",
+        poster: "https://image.tmdb.org/t/p/w500/cJRPOLEexI7qp2DKtFfCh7YaaUG.jpg"
+    },
+    {
+        title: "Jawan",
+        category: "Bollywood",
+        year: 2023,
+        genre: "Action · Thriller",
+        poster: "https://image.tmdb.org/t/p/w500/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg"
+    },
+    {
+        title: "Pathaan",
+        category: "Bollywood",
+        year: 2023,
+        genre: "Action · Spy",
+        poster: "https://image.tmdb.org/t/p/w500/arf00BkwvXo0CFKbaD9fWqg6P6K.jpg"
+    },
+    {
+        title: "Inception",
+        category: "Hollywood",
+        year: 2010,
+        genre: "Sci-Fi · Thriller",
+        poster: "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
+    },
+    {
+        title: "Interstellar",
+        category: "Hollywood",
+        year: 2014,
+        genre: "Sci-Fi · Adventure",
+        poster: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxfbQq1.jpg"
+    },
+    {
+        title: "The Dark Knight",
+        category: "Hollywood",
+        year: 2008,
+        genre: "Action · Crime",
+        poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+    },
+    {
+        title: "Avatar",
+        category: "Hollywood",
+        year: 2009,
+        genre: "Sci-Fi · Adventure",
+        poster: "https://image.tmdb.org/t/p/w500/kyeqWdyUXW608qlYkRqosgbbJyK.jpg"
+    },
+    {
+        title: "RRR",
+        category: "South Indian",
+        year: 2022,
+        genre: "Action · Drama",
+        poster: "https://image.tmdb.org/t/p/w500/nEufeZlyAOLqO2brrs0yeF1lgXO.jpg"
+    },
+    {
+        title: "Baahubali 2",
+        category: "South Indian",
+        year: 2017,
+        genre: "Action · Fantasy",
+        poster: "https://image.tmdb.org/t/p/w500/21sC2assImQIYCEDA84Qh9d1RsK.jpg"
+    },
+    {
+        title: "Pushpa 2",
+        category: "Hindi Dubbed",
+        year: 2024,
+        genre: "Action · Crime",
+        poster: "https://image.tmdb.org/t/p/w500/1QxJa5Z3N5Q0Q4L3J6W2Q0L6J3J.jpg"
+    },
+    {
+        title: "Kantara",
+        category: "Hindi Dubbed",
+        year: 2022,
+        genre: "Action · Mystery",
+        poster: "https://image.tmdb.org/t/p/w500/1s7N1Z4S4L8q9mQ8sQ3mQ0W0g8H.jpg"
+    }
 ];
 
-const container = document.getElementById("movies");
-const message = document.getElementById("message");
+let selectedCategory = "All";
 
-function renderMovies(list) {
-  container.innerHTML = "";
+function setCategory(category, button) {
+    selectedCategory = category;
 
-  if (list.length === 0) {
-    message.textContent = "No movies found. Try another search.";
-    return;
-  }
+    document.querySelectorAll(".categories button")
+        .forEach(btn => btn.classList.remove("active"));
 
-  message.textContent = "";
+    button.classList.add("active");
 
-  list.forEach(movie => {
-    const card = document.createElement("article");
-    card.className = "movie";
-
-    const img = document.createElement("img");
-    img.src = movie.poster;
-    img.alt = movie.title + " poster";
-    img.loading = "lazy";
-    img.onerror = () => {
-      img.style.display = "none";
-    };
-
-    const info = document.createElement("div");
-    info.className = "movie-info";
-
-    const title = document.createElement("h3");
-    title.textContent = movie.title;
-
-    const year = document.createElement("p");
-    year.textContent = movie.year + " · " + movie.language;
-
-    const trailer = document.createElement("a");
-    trailer.href = "https://www.youtube.com/results?search_query="
-      + encodeURIComponent(movie.title + " official trailer");
-    trailer.target = "_blank";
-    trailer.rel = "noopener noreferrer";
-    trailer.textContent = "▶️ Find Trailer";
-
-    info.append(title, year, trailer);
-    card.append(img, info);
-    container.appendChild(card);
-  });
+    renderMovies();
 }
 
-function filterMovies(category) {
-  const list = category === "all"
-    ? movieData
-    : movieData.filter(movie => movie.language === category);
+function renderMovies() {
+    const query = document.getElementById("searchInput")
+        .value.toLowerCase().trim();
 
-  renderMovies(list);
+    const grid = document.getElementById("movieGrid");
+    const message = document.getElementById("message");
+
+    const filtered = movies.filter(movie => {
+        const matchesCategory =
+            selectedCategory === "All" ||
+            movie.category === selectedCategory;
+
+        const matchesSearch =
+            movie.title.toLowerCase().includes(query) ||
+            movie.genre.toLowerCase().includes(query);
+
+        return matchesCategory && matchesSearch;
+    });
+
+    grid.innerHTML = "";
+
+    if (filtered.length === 0) {
+        message.textContent = "No movies found. Try another search.";
+        return;
+    }
+
+    message.textContent = "";
+
+    filtered.forEach(movie => {
+        const card = document.createElement("article");
+        card.className = "movie";
+
+        const poster = document.createElement("img");
+        poster.className = "poster";
+        poster.src = movie.poster;
+        poster.alt = movie.title + " poster";
+        poster.loading = "lazy";
+
+        poster.onerror = function() {
+            this.style.display = "none";
+        };
+
+        const info = document.createElement("div");
+        info.className = "movie-info";
+
+        const title = document.createElement("h3");
+        title.textContent = movie.title;
+
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = movie.category;
+
+        const details = document.createElement("p");
+        details.textContent = movie.year + " · " + movie.genre;
+
+        const trailer = document.createElement("a");
+        trailer.textContent = "▶ Watch Trailer";
+        trailer.href =
+            "https://www.youtube.com/results?search_query=" +
+            encodeURIComponent(movie.title + " official trailer");
+        trailer.target = "_blank";
+        trailer.rel = "noopener noreferrer";
+
+        info.append(title, tag, details, trailer);
+        card.append(poster, info);
+        grid.appendChild(card);
+    });
 }
 
-document.getElementById("searchForm").addEventListener("submit", event => {
-  event.preventDefault();
+document.getElementById("searchInput")
+    .addEventListener("input", renderMovies);
 
-  const query = document.getElementById("searchInput")
-    .value.trim().toLowerCase();
-
-  renderMovies(movieData.filter(movie =>
-    movie.title.toLowerCase().includes(query)
-  ));
-});
-
-document.getElementById("year").textContent = new Date().getFullYear();
-
-renderMovies(movieData);
+renderMovies();
 </script>
 
 </body>
