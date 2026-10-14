@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FimlyBuzz | Movie Discovery</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #090a10;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: #11131b;
+  padding: 20px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #c6ff4d;
+}
+
+.search {
+  display: flex;
+  gap: 6px;
+}
+
+input {
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 7px;
+  background: #20212a;
+  color: white;
+  width: 180px;
+}
+
+button {
+  padding: 12px 15px;
+  background: #c6ff4d;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hero {
+  padding: 65px 6%;
+  background: linear-gradient(120deg, #202b29, #11121b 65%);
+}
+
+.hero h1 {
+  font-size: clamp(36px, 6vw, 60px);
+  margin: 0 0 15px;
+}
+
+.hero h1 span {
+  color: #c6ff4d;
+}
+
+.hero p {
+  color: #c3c5d0;
+  line-height: 1.7;
+  max-width: 550px;
+}
+
+h2 {
+  margin: 35px 6% 20px;
+}
+
+.categories {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 6% 25px;
+}
+
+.categories button {
+  background: #20212a;
+  color: white;
+  border: 1px solid #393b46;
+}
+
+.categories button:hover {
+  background: #c6ff4d;
+  color: black;
+}
+
+.movies {
+  padding: 0 6% 45px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 20px;
+}
+
+.movie {
+  background: #151720;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #292b35;
+  transition: transform .2s;
+}
+
+.movie:hover {
+  transform: translateY(-5px);
+}
+
+.movie img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+  background: #252832;
+}
+
+.movie-info {
+  padding: 12px;
+}
+
+.movie-info h3 {
+  font-size: 15px;
+  margin: 0 0 8px;
+}
+
+.movie-info p {
+  font-size: 12px;
+  color: #b7bac7;
+}
+
+.movie-info a {
+  display: inline-block;
+  margin-top: 5px;
+  color: #c6ff4d;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+footer {
+  padding: 25px 6%;
+  background: #11131b;
+  color: #a9abba;
+  text-align: center;
+  font-size: 13px;
+}
+
+#message {
+  margin: 0 6% 25px;
+  color: #c6ff4d;
+}
+
+@media(max-width: 500px) {
+  header {
+    align-items: flex-start;
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .movies {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">FimlyBuzz 🎬</div>
+
+  <form class="search" id="searchForm">
+    <input id="searchInput" placeholder="Search movies..." />
+    <button type="submit">Search</button>
+  </form>
+</header>
+
+<section class="hero">
+  <h1>Discover Your Next<br><span>Favourite Movie.</span></h1>
+
+  <p>
+    Explore cinema from around the world.
+    Discover movies, browse genres and find official trailers
+    with FimlyBuzz.
+  </p>
+
+  <button onclick="document.getElementById('movieSection').scrollIntoView({behavior:'smooth'})">
+    Explore Movies ↓
+  </button>
+</section>
+
+<h2 id="movieSection">🔥 Movie Collection</h2>
+
+<div class="categories">
+  <button onclick="filterMovies('all')">All</button>
+  <button onclick="filterMovies('bollywood')">Bollywood</button>
+  <button onclick="filterMovies('hollywood')">Hollywood</button>
+  <button onclick="filterMovies('south')">South Indian</button>
+  <button onclick="filterMovies('animation')">Animation</button>
+</div>
+
+<div id="message"></div>
+<div class="movies" id="movies"></div>
+
+<footer>
+  <div class="logo">FimlyBuzz</div>
+  <p>Discover movies. Explore stories. Love cinema.</p>
+  <p>Movie information and trailers are linked to their respective sources.</p>
+  <p>© <span id="year"></span> FimlyBuzz</p>
+</footer>
+
+<script>
+const movieData = [
+  {
+    title: "Jawan",
+    language: "bollywood",
+    year: "2023",
+    poster: "https://image.tmdb.org/t/p/w500/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg"
+  },
+  {
+    title: "Inception",
+    language: "hollywood",
+    year: "2010",
+    poster: "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg"
+  },
+  {
+    title: "RRR",
+    language: "south",
+    year: "2022",
+    poster: "https://image.tmdb.org/t/p/w500/wE0I6efAW4cDDmZQWtwZMOW44EJ.jpg"
+  },
+  {
+    title: "Spider-Man: Into the Spider-Verse",
+    language: "animation",
+    year: "2018",
+    poster: "https://image.tmdb.org/t/p/w500/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg"
+  }
+];
+
+const container = document.getElementById("movies");
+const message = document.getElementById("message");
+
+function renderMovies(list) {
+  container.innerHTML = "";
+
+  if (list.length === 0) {
+    message.textContent = "No movies found. Try another search.";
+    return;
+  }
+
+  message.textContent = "";
+
+  list.forEach(movie => {
+    const card = document.createElement("article");
+    card.className = "movie";
+
+    const img = document.createElement("img");
+    img.src = movie.poster;
+    img.alt = movie.title + " poster";
+    img.loading = "lazy";
+    img.onerror = () => {
+      img.style.display = "none";
+    };
+
+    const info = document.createElement("div");
+    info.className = "movie-info";
+
+    const title = document.createElement("h3");
+    title.textContent = movie.title;
+
+    const year = document.createElement("p");
+    year.textContent = movie.year + " · " + movie.language;
+
+    const trailer = document.createElement("a");
+    trailer.href = "https://www.youtube.com/results?search_query="
+      + encodeURIComponent(movie.title + " official trailer");
+    trailer.target = "_blank";
+    trailer.rel = "noopener noreferrer";
+    trailer.textContent = "▶️ Find Trailer";
+
+    info.append(title, year, trailer);
+    card.append(img, info);
+    container.appendChild(card);
+  });
+}
+
+function filterMovies(category) {
+  const list = category === "all"
+    ? movieData
+    : movieData.filter(movie => movie.language === category);
+
+  renderMovies(list);
+}
+
+document.getElementById("searchForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const query = document.getElementById("searchInput")
+    .value.trim().toLowerCase();
+
+  renderMovies(movieData.filter(movie =>
+    movie.title.toLowerCase().includes(query)
+  ));
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+renderMovies(movieData);
+</script>
+
+</body>
+</html>
